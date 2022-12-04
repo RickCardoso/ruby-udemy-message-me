@@ -10,6 +10,13 @@ Rails.application.routes.draw do
   # delete "/logout", to: "sessions#destroy"
 
   # Defines signin and signup routes
-  get "/sign-in", to: "users#new"
-  post "/sign-in", to: "users#create"
+  resources :users, only: [:new, :create]
+
+  # Defines the routes for the sessions controller
+  # resources :sessions, only: [:new, :create, :destroy]
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+
+  # Defines the routes for the chatroom controller
+  resources :chatrooms, param: :slug
 end
